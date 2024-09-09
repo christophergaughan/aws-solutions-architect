@@ -6,7 +6,10 @@ tasks:
       curl -O https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
       unzip awscli-exe-linux-x86_64.zip
       sudo ./aws/install --no-sign-request
-      cd $THEIA_WORKSPACE_ROOT# 
+      cd $THEIA_WORKSPACE_ROOT
+      aws configure set region us-east-1
+      aws configure set output json
+
 
 
 
