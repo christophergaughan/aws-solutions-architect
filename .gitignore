@@ -1,3 +1,4 @@
 aws/
 awscliv2.zip
+!aws/s3/bash-scripts/
 

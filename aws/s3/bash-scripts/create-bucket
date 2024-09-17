@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Check if an argument (bucket name) is passed
+if [ -z "$1" ]; then
+  echo "No bucket name supplied"
+  exit 1
+else
+  echo "Creating bucket: $1"
+fi
+
+# Create the S3 bucket using the argument as the bucket name
+aws s3api create-bucket --bucket "$1" --region us-east-1

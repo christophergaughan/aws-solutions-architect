@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+'''
+How the Script Works:
+Argument Check: It verifies if a bucket name is provided. If not, it prints a usage message and exits.
+Listing Command: The AWS CLI aws s3 ls command is used to list all objects in the specified S3 bucket.
+'''
+
+# Check if a bucket name is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <bucket-name>"
+  exit 1
+else
+  echo "Listing objects in bucket: $1"
+fi
+
+# List the objects in the specified S3 bucket
+aws s3 ls s3://"$1"/

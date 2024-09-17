@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Check if a bucket name and file path are provided
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: $0 <bucket-name> <file-path>"
+  exit 1
+else
+  echo "Uploading $2 to bucket: $1"
+fi
+
+# Upload the file to the specified S3 bucket
+aws s3 cp "$2" s3://"$1"/
