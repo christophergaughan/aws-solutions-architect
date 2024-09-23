@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# sync-bucket.sh - Sync files between local directory and S3 bucket
+#
+# Usage: ./sync-bucket.sh <bucket-name> [local-directory]
+#
+# This script syncs files between a local directory and an S3 bucket.
+# If a local directory is provided, it will upload to the S3 bucket.
+# If no local directory is provided, it will download from the S3 bucket to the current directory.
+
+# Check if a bucket name is provided
+if [ -z "$1" ]; then
+  echo "Usage: $0 <bucket-name> [local-directory]"
+  exit 1
+fi
+
+bucket_name=$1
+local_dir=${2:-.}  # Default to current directory if no local directory is provided
+
+# Sync to the bucket
+aws s3 sync "$local_dir" "s3://$bucket_name/"
