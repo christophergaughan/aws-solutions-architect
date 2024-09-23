@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# get-newest-bucket.sh - Show the newest S3 bucket
+#
+# Usage: ./get-newest-bucket.sh
+#
+# This script retrieves the most recently created S3 bucket
+# associated with your AWS account.
+# Ensure you have AWS CLI configured with the necessary permissions to access S3.
+
+# Get the newest bucket
+newest_bucket=$(aws s3api list-buckets --query "Buckets | sort_by(@, &CreationDate) | [-1]" --output text)
+
+# Check if a bucket was found
+if [ -z "$newest_bucket" ]; then
+  echo "No buckets found."
+else
+  echo "Newest bucket: $newest_bucket"
+fi
