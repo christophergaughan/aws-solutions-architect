@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+echo "== list newest buckets"
 # list-buckets.sh - List all S3 buckets sorted by creation date
 #
 # Usage: ./list-buckets.sh
