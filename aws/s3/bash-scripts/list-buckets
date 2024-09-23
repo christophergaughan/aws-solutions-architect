@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-# list-buckets.sh - List all S3 buckets
+# list-buckets.sh - List all S3 buckets sorted by creation date
 #
 # Usage: ./list-buckets.sh
 #
-# This script lists all S3 buckets associated with your AWS account.
+# This script lists all S3 buckets associated with your AWS account,
+# sorted by creation date with the latest buckets on top.
 # Ensure you have AWS CLI configured with the necessary permissions to access S3.
 
-# List the S3 buckets
-aws s3 ls
+# Get the list of buckets and their creation dates, sort by date, and format the output
+aws s3api list-buckets --query "Buckets[*].[Name, CreationDate]" --output text | sort -k2 -r
+
