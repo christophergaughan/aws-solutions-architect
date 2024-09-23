@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+# put-object.sh - Upload a file to an S3 bucket
+#
+# Usage: ./put-object.sh <bucket-name> <file-path>
+#
+# This script uploads a specified file to the given S3 bucket.
+# Ensure you have AWS CLI configured with the necessary permissions to access S3.
+#
+# Steps to use this script:
+# 1. Download the file from the source S3 bucket to your local environment:
+#    aws s3 cp s3://<source-bucket>/<file-name> .
+#
+# 2. Upload the downloaded file to the desired S3 bucket using this script:
+#    ./put-object.sh <bucket-name> <file-path>
+#
+# Arguments:
+#   <bucket-name>   The name of the S3 bucket to upload the file to.
+#   <file-path>     The local path of the file to upload.
+#
+# Example:
+#   ./put-object.sh my-new-shiny-bucket-cg ./anaconda.png
+
 # Check if a bucket name and file path are provided
 if [ -z "$1" ] || [ -z "$2" ]; then
   echo "Usage: $0 <bucket-name> <file-path>"
@@ -10,3 +31,4 @@ fi
 
 # Upload the file to the specified S3 bucket
 aws s3 cp "$2" s3://"$1"/
+
