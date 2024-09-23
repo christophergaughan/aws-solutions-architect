@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# delete-objects.sh - Delete one or more objects from an S3 bucket
+# delete-objects.sh - Delete multiple objects from an S3 bucket
 #
 # Usage: ./delete-objects.sh <bucket-name> <file-name1> [<file-name2> ...]
 #
@@ -16,12 +16,26 @@ fi
 bucket_name=$1
 shift  # Remove the bucket name from the list of arguments
 
-# Loop through all provided file names and delete them
+# Prepare the JSON input for delete-objects
+json_objects="{\"Objects\":["
+first=1
+
 for file_name in "$@"; do
   if [ -n "$file_name" ]; then
-    echo "Deleting $file_name from bucket: $bucket_name"
-    aws s3 rm "s3://$bucket_name/$file_name"
+    if [ $first -eq 1 ]; then
+      first=0
+    else
+      json_objects+=","
+    fi
+    json_objects+="{\"Key\":\"$file_name\"}"
   else
     echo "No file name provided to delete."
   fi
 done
+
+json_objects+="]}"
+
+# Delete the specified files from the S3 bucket
+echo "Deleting objects from bucket: $bucket_name"
+aws s3api delete-objects --bucket "$bucket_name" --delete "$json_objects"
+
