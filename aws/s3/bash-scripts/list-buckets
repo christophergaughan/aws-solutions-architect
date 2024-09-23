@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# list-buckets.sh - List all S3 buckets
+#
+# Usage: ./list-buckets.sh
+#
+# This script lists all S3 buckets associated with your AWS account.
+# Ensure you have AWS CLI configured with the necessary permissions to access S3.
+
+# List the S3 buckets
+aws s3 ls
