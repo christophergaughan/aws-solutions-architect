@@ -11,6 +11,27 @@ tasks:
       aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
       aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 
+- name: setup-python-env
+    init: |
+      cd aws/s3/sdk/Python
+      python -m venv python_venv
+      . python_venv/bin/activate
+      pip install boto3
+
+  - name: configure-bashrc
+    init: |
+      # Add virtual environment activation logic to .bashrc
+      echo 'cd_func () {' >> ~/.bashrc
+      echo '  builtin cd "$@"' >> ~/.bashrc
+      echo '  if [[ "$PWD" == */aws/s3/sdk/Python ]]; then' >> ~/.bashrc
+      echo '    if [ -d "python_venv" ]; then' >> ~/.bashrc
+      echo '      echo "Activating virtual environment in $PWD"' >> ~/.bashrc
+      echo '      . python_venv/bin/activate' >> ~/.bashrc
+      echo '    fi' >> ~/.bashrc
+      echo '  fi' >> ~/.bashrc
+      echo '}' >> ~/.bashrc
+      echo 'alias cd="cd_func"' >> ~/.bashrc
+      source ~/.bashrc
 
 
 
