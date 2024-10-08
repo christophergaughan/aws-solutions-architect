@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-
-echo "Current PATH: $PATH"
-which aws
-aws --version
-
-echo "== deploy s3 bucket via CFN"
+set -e
 
 STACK_NAME="cfn-s3-simple"
 
-aws cloudformation delete-stack \
---stack-name $STACK_NAME
+# Check if the stack exists before attempting deletion
+if aws cloudformation describe-stacks --stack-name $STACK_NAME > /dev/null 2>&1; then
+    echo "Stack $STACK_NAME exists. Proceeding to delete."
+    aws cloudformation delete-stack --stack-name $STACK_NAME
+    echo "Delete command executed for stack: $STACK_NAME"
+else
+    echo "Stack $STACK_NAME does not exist. No action needed."
+fi
+
