@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo "Current PATH: $PATH"
+which aws
+aws --version
+
+echo "== deploy s3 bucket via CFN"
+
+STACK_NAME="cfn-s3-simple"
+
+aws cloudformation delete-stack \
+--stack-name $STACK_NAME
