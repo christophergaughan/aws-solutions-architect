@@ -2,28 +2,14 @@ tasks:
   - name: cdk
     before: |
       npm i -g aws-cdk 
+
   - name: terraform
     before: |
-      ./source aws/bin/terraform_cli_install 
-      # sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-      # wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
-      # gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
-      # echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-      # sudo apt update
-      # sudo apt-get install terraform
+      ./aws/bin/terraform_cli_install.sh  # Fixed execution path
 
   - name: setup-aws-cli
     init: |
-      ./workspaces/aws-solutions-architect/aws/bin/aws_cli_install.sh
-      # cd /workspace
-      # curl -O https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-      # unzip awscli-exe-linux-x86_64.zip
-      # sudo ./aws/install
-      # cd $THEIA_WORKSPACE_ROOT
-      # aws configure set region us-east-1
-      # aws configure set output json
-      # aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-      # aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      ./aws/bin/aws_cli_install.sh  # Fixed execution path
 
   - name: setup-python-env
     init: |
@@ -34,7 +20,6 @@ tasks:
 
   - name: configure-bashrc
     init: |
-      # Add virtual environment activation logic to .bashrc
       echo 'cd_func () {' >> ~/.bashrc
       echo '  builtin cd "$@"' >> ~/.bashrc
       echo '  if [[ "$PWD" == */aws/s3/sdk/Python ]]; then' >> ~/.bashrc
@@ -46,10 +31,3 @@ tasks:
       echo '}' >> ~/.bashrc
       echo 'alias cd="cd_func"' >> ~/.bashrc
       source ~/.bashrc
-
-
-
-
-
-
-
