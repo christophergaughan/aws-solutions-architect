@@ -22,4 +22,5 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
-
+# Ignore Python virtual environment (you can add this here)
+aws/s3/sdk/Python/python_venv/
