@@ -5,11 +5,11 @@ tasks:
 
   - name: terraform
     before: |
-      ./aws/bin/terraform_cli_install.sh  # Fixed execution path
+      ./workspaces/aws-solutions-architect/aws/bin/terraform_cli_install.sh
 
   - name: setup-aws-cli
     init: |
-      ./aws/bin/aws_cli_install.sh  # Fixed execution path
+      ./workspaces/aws-solutions-architect/aws/bin/aws_cli_install.sh
 
   - name: setup-python-env
     init: |
