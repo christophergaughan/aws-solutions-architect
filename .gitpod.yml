@@ -5,11 +5,13 @@ tasks:
 
   - name: terraform
     before: |
-      ./workspaces/aws-solutions-architect/aws/bin/terraform_cli_install.sh
+      /workspace/aws-solutions-architect/aws/bin/terraform_cli_install.sh
 
   - name: setup-aws-cli
     init: |
-      ./workspaces/aws-solutions-architect/aws/bin/aws_cli_install.sh
+      /workspace/aws-solutions-architect/aws/bin/aws_cli_install.sh
+      echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
+      source ~/.bashrc
 
   - name: setup-python-env
     init: |
