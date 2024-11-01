@@ -19,3 +19,5 @@ When you create an object, you also specify the key name, which uniquely identif
 
 There are two kinds of metadata in Amazon S3: system-defined metadata and user-defined metadata. The following sections provide more information about system-defined and user-defined metadata. For more information about editing metadata using the Amazon S3 console, see Editing object metadata in the Amazon S3 console.
 
+## Cleanup
+`1aws s3 rm s3://metadata-bucket-clg/hello.txt`
