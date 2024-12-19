@@ -1,35 +1,34 @@
+# Gitpod configuration file
+image: ./Dockerfile
+
 tasks:
-  - name: cdk
-    before: |
-      npm i -g aws-cdk 
-
-  - name: terraform
-    before: |
-      /workspace/aws-solutions-architect/aws/bin/terraform_cli_install.sh
-
-  - name: setup-aws-cli
+  - name: setup-environment
     init: |
-      /workspace/aws-solutions-architect/aws/bin/aws_cli_install.sh
-      echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc
-      source ~/.bashrc
-
-  - name: setup-python-env
-    init: |
+      echo "Setting up environment..."
+      ./aws/bin/aws_cli_install.sh
+      ./aws/bin/terraform_cli_install.sh
       cd aws/s3/sdk/Python
-      python -m venv python_venv
-      . python_venv/bin/activate
+      python3 -m venv python_venv
+      source python_venv/bin/activate
       pip install boto3
+    command: |
+      echo "Environment setup complete!"
+  - name: verify-setup
+    command: |
+      echo "Verifying AWS CLI..."
+      aws --version
+      aws sts get-caller-identity
+      echo "AWS CLI setup verified."
 
-  - name: configure-bashrc
-    init: |
-      echo 'cd_func () {' >> ~/.bashrc
-      echo '  builtin cd "$@"' >> ~/.bashrc
-      echo '  if [[ "$PWD" == */aws/s3/sdk/Python ]]; then' >> ~/.bashrc
-      echo '    if [ -d "python_venv" ]; then' >> ~/.bashrc
-      echo '      echo "Activating virtual environment in $PWD"' >> ~/.bashrc
-      echo '      . python_venv/bin/activate' >> ~/.bashrc
-      echo '    fi' >> ~/.bashrc
-      echo '  fi' >> ~/.bashrc
-      echo '}' >> ~/.bashrc
-      echo 'alias cd="cd_func"' >> ~/.bashrc
-      source ~/.bashrc
+# Specify prebuilds for faster startup
+prebuilds:
+  master: true
+
+# Environment variables for AWS credentials
+# Replace these with real values in Gitpod Dashboard (to keep secrets safe)
+vscode:
+  extensions:
+    - ms-python.python
+    - hashicorp.terraform
+
+
