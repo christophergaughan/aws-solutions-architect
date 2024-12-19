@@ -24,3 +24,8 @@ crash.*.log
 
 # Ignore Python virtual environment (you can add this here)
 aws/s3/sdk/Python/python_venv/
+.env
+*.zip
+core
+AWSCLIV2.pkg
+awscli-exe-linux-x86_64.zip
