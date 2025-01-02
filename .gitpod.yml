@@ -1,5 +1,5 @@
 tasks:
-  - name: setup-aws-cli
+  - name: setup-environment
     init: |
       cd /workspace
       curl -O https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
