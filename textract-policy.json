@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowTextractOperations",
+      "Effect": "Allow",
+      "Action": [
+        "textract:AnalyzeDocument",
+        "textract:AnalyzeExpense",
+        "textract:StartDocumentAnalysis",
+        "textract:GetDocumentAnalysis"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowS3Access",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::vascculogic",
+        "arn:aws:s3:::vascculogic/*"
+      ]
+    }
+  ]
+}
+

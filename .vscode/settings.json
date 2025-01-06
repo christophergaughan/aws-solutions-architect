@@ -1,5 +1,10 @@
 {
     "files.watcherExclude": {
         "**/target": true
+    },
+    "workbench.editorAssociations": {
+        "{git,gitlens,conflictResolution,vscode-local-history}:/**/*.tc.json": "default",
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "file:/**/*.xlsx": "jupyter-data-wrangler"
     }
 }
